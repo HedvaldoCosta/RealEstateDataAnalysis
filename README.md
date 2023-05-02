@@ -26,7 +26,6 @@ streamlit 1.5.1
 
 streamlit-folium 0.5.0
 
-click 7.1.2
 
 # SUMMARY
 House Rocket is a digital platform whose business model is the purchase and sale of properties using technology. The platform needs a better way to search for good homebuying opportunities in Seattle.
@@ -35,7 +34,7 @@ House Rocket is a digital platform whose business model is the purchase and sale
 The application makes it possible to use a filter to facilitate the search for houses by price, number of bathrooms, bedrooms and whether it is by the sea so that these houses are shown on a map that divides the areas by average price and shows the information of each house next to a table.
 
 # SOLUTION
-Taking data from kaggle (https://www.kaggle.com/shivachandel/kc-house-data), and importing it into Jupyter Notebook to perform exploratory data analysis, it is possible to create insights for better solution development and discover data that tends to be unnecessary for the application. Applying data cleaning and transformation, which will improve what we need to solve the problem, from pycharm, and selecting the best attributes, taking into account what is requested, it is possible to build a report using the map and filters that are placed in production on Streamlit, thus facilitating decision making.
+Taking data from kaggle (https://www.kaggle.com/shivachandel/kc-house-data), and importing it into Jupyter Notebook to perform exploratory data analysis, it is possible to create insights for better solution development and discover data that tends to be unnecessary for the application. Applying data cleaning and transformation, which will improve what we need to solve the problem, from pycharm, and selecting the best attributes, taking into account what is requested, it is possible to build a report using the map and filters that are placed in production on Streamlit, thus facilitating decision making. The data collected for the construction of the map (https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::zip-codes/explore?location=47.243611%2C-121.083221%2C7.39).
 
 # TOOLS
 Python 3.8
@@ -55,5 +54,3 @@ plotly 5.4.0
 streamlit 1.5.1
 
 streamlit-folium 0.5.0
-
-click 7.1.2
