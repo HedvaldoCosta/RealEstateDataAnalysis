@@ -8,7 +8,7 @@ A House Rocket é uma plataforma digital que tem como modelo de negócio, a comp
 Retirando os dados do kaggle (https://www.kaggle.com/shivachandel/kc-house-data), e importando no Jupyter Notebook para fazer a análise exploratória de dados, é possível criar insights para um melhor desenvolvimento da solução e descobrir dados que tendem a ser desnecessários para a aplicação. Aplicando a limpeza e transformação dos dados, que irão aprimorar o que necessitamos para resolver o problema, a partir do pycharm, e selecionando os melhores atributos, levando em conta o que é pedido, é possível construir um relatório utilizando mapa e filtros que sejam colocados em produção no Streamlit, assim, facilitando a tomada de decisão. Os dados retirados para a construção do mapa (https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::zip-codes/explore?location=47.243611%2C-121.083221%2C7.39).
 
 # FERRAMENTAS
-Python 3.8
+Python 3.9.13
 
 PyCharm Community Edition 2022.1.3
 
@@ -37,7 +37,7 @@ The application makes it possible to use a filter to facilitate the search for h
 Taking data from kaggle (https://www.kaggle.com/shivachandel/kc-house-data), and importing it into Jupyter Notebook to perform exploratory data analysis, it is possible to create insights for better solution development and discover data that tends to be unnecessary for the application. Applying data cleaning and transformation, which will improve what we need to solve the problem, from pycharm, and selecting the best attributes, taking into account what is requested, it is possible to build a report using the map and filters that are placed in production on Streamlit, thus facilitating decision making. The data collected for the construction of the map (https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::zip-codes/explore?location=47.243611%2C-121.083221%2C7.39).
 
 # TOOLS
-Python 3.8
+Python 3.9.13
 
 PyCharm Community Edition 2022.1.3
 
