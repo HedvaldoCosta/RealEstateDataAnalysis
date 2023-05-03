@@ -1,4 +1,5 @@
-![house_rocket_img.png](house_rocket_img.png)
+![house_rocket_img](https://user-images.githubusercontent.com/67663958/235933037-a6e78549-6ad2-4e37-a4ae-ba53fc8842b0.png)
+
 
 # RESUMO
 A House Rocket é uma plataforma digital que tem como modelo de negócio, a compra e a venda de imóveis usando tecnologia. A plataforma necessita de uma melhor forma para buscar boas oportunidades de compra de casas em Seattle.
@@ -11,7 +12,8 @@ Retirando os dados do kaggle (https://www.kaggle.com/shivachandel/kc-house-data)
 
 **Código da solução:** https://bit.ly/44mtXQf
 
-![HouseRocket.gif](HouseRocket.gif)
+![2023-05-03-10-50-36](https://user-images.githubusercontent.com/67663958/235936276-3fa83d82-2a12-47a9-bf39-42f0509ffbb6.gif)
+
 
 # FERRAMENTAS
 Python 3.9.13
