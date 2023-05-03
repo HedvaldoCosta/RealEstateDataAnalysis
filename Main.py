@@ -8,8 +8,8 @@ from folium.plugins import MarkerCluster
 
 
 # Arquivos utilizados para a resolução do problema
-data_raw = 'https://raw.githubusercontent.com/HedvaldoCosta/DataScience/main/kc-house/Datasets/kc_house_data.csv'
-geofile = 'https://raw.githubusercontent.com/HedvaldoCosta/DataScience/main/kc-house/Datasets/Zip_Codes.geojson'
+data_raw = 'https://raw.githubusercontent.com/HedvaldoCosta/HouseRocket/main/Arquivos/kc_house_data.csv'
+geofile = 'https://raw.githubusercontent.com/HedvaldoCosta/HouseRocket/main/Arquivos/Zip_Codes.geojson'
 
 
 # Função para carregar e transformar os dados
