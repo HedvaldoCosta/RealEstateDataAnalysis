@@ -1,3 +1,5 @@
+![house_rocket_img.png](house_rocket_img.png)
+
 # RESUMO
 A House Rocket é uma plataforma digital que tem como modelo de negócio, a compra e a venda de imóveis usando tecnologia. A plataforma necessita de uma melhor forma para buscar boas oportunidades de compra de casas em Seattle.
 
@@ -6,6 +8,10 @@ A House Rocket é uma plataforma digital que tem como modelo de negócio, a comp
 
 # SOLUÇÃO
 Retirando os dados do kaggle (https://www.kaggle.com/shivachandel/kc-house-data), e importando no Jupyter Notebook para fazer a análise exploratória de dados, é possível criar insights para um melhor desenvolvimento da solução e descobrir dados que tendem a ser desnecessários para a aplicação. Aplicando a limpeza e transformação dos dados, que irão aprimorar o que necessitamos para resolver o problema, a partir do pycharm, e selecionando os melhores atributos, levando em conta o que é pedido, é possível construir um relatório utilizando mapa e filtros que sejam colocados em produção no Streamlit, assim, facilitando a tomada de decisão. Os dados retirados para a construção do mapa (https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::zip-codes/explore?location=47.243611%2C-121.083221%2C7.39).
+
+**Código da solução:** https://bit.ly/44mtXQf
+
+![HouseRocket.gif](HouseRocket.gif)
 
 # FERRAMENTAS
 Python 3.9.13
