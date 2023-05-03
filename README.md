@@ -34,7 +34,125 @@ streamlit 1.5.1
 
 streamlit-folium 0.5.0
 
+# SOBRE O CÓDIGO
+```python
+# pandas foi utilizado para carregar o arquivo .csv
+import pandas as pd
+# numpy foi utilizado para transformação dos dados
+import numpy as np
+# Construir a aplicação web
+import streamlit as st
+# Criação do mapa
+import folium
+# Carregamento do arquivo .geojson
+import geopandas
+# Demonstração do mapa na aplicação web
+from streamlit_folium import folium_static
+# Acrescentação de pontos e informações no mapa
+from folium.plugins import MarkerCluster
+```
 
+```python
+# Arquivos utilizados para a construção da aplicação (ambos voltado para Seattle)
+data_raw = 'https://raw.githubusercontent.com/HedvaldoCosta/HouseRocket/main/Arquivos/kc_house_data.csv'
+geofile = 'https://raw.githubusercontent.com/HedvaldoCosta/HouseRocket/main/Arquivos/Zip_Codes.geojson'
+```
+
+```python
+# Função utilizada para carregar o arquivo da variável "data_raw" e tratar os dados
+def read_data():
+    df = pd.read_csv(data_raw)
+    # Tratamento dos dados para arredondar os valores nas colunas
+    # banheiros e andares. Não seria viável utilizar valores float 
+    df['bathrooms'] = np.int64(round(df['bathrooms'] - 0.3))
+    df['floors'] = np.int64(round(df['floors'] - 0.3))
+    # Mudando os dados da coluna "waterfront" para uma melhor demonstração
+    # no filtro "beira-mar" criado na aplicação
+    df['waterfront'] = df['waterfront'].apply(lambda x: 'SIM' if x == 1 else 'NÃO')
+    # Pegando apenas o ano de cada casa e aplicando em uma nova coluna
+    df['age'] = np.int64(np.int64(pd.to_datetime(df['date']).dt.strftime('%Y')) - df['yr_built'])
+    # Excluindo dados desnecessários para a criação da aplicação
+    df.drop(
+        columns=['sqft_living', 'sqft_above', 'sqft_basement', 'yr_renovated', 'sqft_living15', 'sqft_lot15', 'date'],
+        axis=1, inplace=True)
+    dados_remove = []
+    # Excluindo outliers
+    for c in range(0, len(df['bedrooms'])):
+        if (df['bedrooms'][c] in [0, 7, 8, 9, 10, 11, 33]) | (df['bathrooms'][c] in [0, 7, 8]):
+            dados_remove.append(c)
+
+    df.drop(index=dados_remove, inplace=True)
+    return df
+```
+```python
+# Função utilizada para carregar o arquivo .geojson e aplicar marcação e 
+# executar o mapa
+def load_map(data):
+    data_map = geopandas.read_file(geofile)
+    # Pegando os dados de latitude e longitude para criar o mapa
+    mapa = folium.Map(location=[data['lat'].mean(), data['long'].mean()])
+    # Criação dos marcadores no mapa
+    marker_cluster = MarkerCluster().add_to(mapa)
+    for name, row in data.iterrows():
+        folium.Marker(location=[row['lat'], row['long']], popup=f'''
+        ID:{row["id"]}
+        PREÇO:{row["price"]}
+        BEIRA-MAR:{row["waterfront"]}
+        BANHEIROS:{row["bathrooms"]}
+        QUARTOS:{row["bedrooms"]}
+        ''').add_to(marker_cluster)
+    # Execução do mapa
+    df = data[['price', 'zipcode']].groupby('zipcode').mean().reset_index()
+    data_map = data_map[data_map['ZIP'].isin(data['zipcode'].tolist())]
+    folium.Choropleth(geo_data=data_map, data=df, columns=['zipcode', 'price'], key_on='feature.properties.ZIP',
+                      fill_color='YlOrRd',
+                      fill_opacity=0.9,
+                      line_opacity=0.4).add_to(mapa)
+    return folium_static(mapa)
+```
+
+```python
+# Carregando a função read_data()
+dataframe_st = read_data()
+
+# Funções utilizadas para a construção dos filtros (barra lateral)
+st.sidebar.title('Localização e atributos')
+# Acrescentação de checkboxs para demonstrar a tabela e o mapa
+show_dataframe = st.sidebar.checkbox('Mostrar tabela', True)
+show_map = st.sidebar.checkbox('Mostrar mapa')
+# Filtragem por ID das casas (múltiplas casas podem ser selecionadas)
+filter_id = st.sidebar.multiselect('ID das casas', dataframe_st['id'].unique().tolist())
+# Filtro por preço
+filter_price = st.sidebar.slider('Preço das casas', int(dataframe_st['price'].min()), int(dataframe_st['price'].max()),
+                                 int(dataframe_st['price'].mean()))
+# Filtro por número de banheiros, quartos e se a casa possui beira-mar
+filter_bedrooms = st.sidebar.selectbox('Número de quartos', dataframe_st['bedrooms'].sort_values().unique().tolist())
+filter_bathrooms = st.sidebar.selectbox('Número de banheiros',
+                                        dataframe_st['bathrooms'].sort_values().unique().tolist())
+filter_waterfront = st.sidebar.selectbox('Beira-mar', dataframe_st['waterfront'].unique().tolist())
+```
+
+```python
+# Execução do filtro sobre os IDs das casas
+if filter_id:
+    dataframe_st = dataframe_st.loc[dataframe_st['id'].isin(filter_id)]
+else:
+    dataframe_st = dataframe_st.loc[(dataframe_st['price'] <= filter_price) &
+                                    (dataframe_st['bedrooms'].isin([filter_bedrooms])) &
+                                    (dataframe_st['bathrooms'].isin([filter_bathrooms])) &
+                                    (dataframe_st['waterfront'].isin([filter_waterfront]))]
+# Mostrando apenas a tabela
+if show_dataframe:
+    st.dataframe(dataframe_st)
+    st.info(f'Total de {len(dataframe_st)} casas')
+# Mostrando mapa e tabela (Se o total de casas for 0, demonstrará nada)
+if (show_map == True) & (show_dataframe == True) & (len(dataframe_st) != 0):
+    load_map(data=dataframe_st[['id', 'zipcode', 'lat', 'long', 'price', 'bedrooms', 'bathrooms', 'waterfront']])
+# Mostrando apenas o mapa (Se o total de casas for 0, demonstrará nada)
+if (show_map == True) & (show_dataframe == False) & (len(dataframe_st) != 0):
+    st.info(f'Total de {len(dataframe_st)} casas')
+    load_map(data=dataframe_st[['id', 'zipcode', 'lat', 'long', 'price', 'bedrooms', 'bathrooms', 'waterfront']])
+```
 # SUMMARY
 House Rocket is a digital platform whose business model is the purchase and sale of properties using technology. The platform needs a better way to search for good homebuying opportunities in Seattle.
 
