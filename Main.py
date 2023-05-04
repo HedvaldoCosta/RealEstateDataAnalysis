@@ -12,7 +12,7 @@ from folium.plugins import MarkerCluster
 data_raw = 'https://raw.githubusercontent.com/HedvaldoCosta/HouseRocket/main/Arquivos/kc_house_data.csv'
 geofile = 'https://raw.githubusercontent.com/HedvaldoCosta/HouseRocket/main/Arquivos/Zip_Codes.geojson'
 
-
+# Início da classe "Houserocket":
 # Função para carregar e transformar os dados
 def read_data():
     df = pd.read_csv(data_raw)
