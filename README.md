@@ -11,6 +11,12 @@ Retirando os dados do kaggle (https://www.kaggle.com/shivachandel/kc-house-data)
 
 **Código da solução:** https://bit.ly/44mtXQf
 
+**Notebook kaggle:** https://www.kaggle.com/code/hedvaldocosta/house-rocket
+
+**Dashboard:** https://app.powerbi.com/view?r=eyJrIjoiZTAzOGI1ZjEtOWZlZS00ZDdlLTgzOTctMWQ2MDQ4NzMzZTBkIiwidCI6ImU0NmMwZTRiLThhY2YtNDMyZC05NjE3LWM4ZWJmNDdlMjY3NSJ9
+
+**Aplicativo:** https://houserocket-dsqfawea9t3qlsjiocv4zc.streamlit.app/
+
 ![2023-05-03-10-50-36](https://user-images.githubusercontent.com/67663958/235936276-3fa83d82-2a12-47a9-bf39-42f0509ffbb6.gif)
 
 
